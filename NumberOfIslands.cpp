@@ -1,9 +1,8 @@
-#include <iostream>
 #include <vector>
 #include <queue>
 using namespace std;
 
-int numIslands(vector<vector<char>>& grid) 
+int numIslands(vector<vector<char>>& grid)
 {
     int m = static_cast<int>(grid.size());
     int n = static_cast<int>(grid[0].size());
