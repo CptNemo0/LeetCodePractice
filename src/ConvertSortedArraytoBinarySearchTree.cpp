@@ -42,19 +42,11 @@ TreeNode* sortedArrayToBST(vector<int>& nums)
     if(mid > low)
     {
         left.insert(left.begin(), nums.begin(), nums.begin() + mid);
-        //for(int i = 0 ; i < mid ; i++)
-        //{
-        //    left.push_back(nums[i]);
-        //}
     }
 
     if(mid < high)
     {
         right.insert(right.begin(), nums.begin() + mid + 1, nums.end());
-        //for(int i = mid + 1 ; i < n ; i++)
-        //{
-        //    right.push_back(nums[i]);
-        //}
     }
 
     //cout<<"left: ";
