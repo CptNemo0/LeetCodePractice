@@ -46,6 +46,6 @@ int mySqrt(int x)
 
 int main()
 {
-    // it overflows but the idea is good, just a bullshit testcase
+    // it overflows, idea and the algorithm are good, just a bullshit testcase
     cout<<mySqrt(2147395599)<<endl;
 }
