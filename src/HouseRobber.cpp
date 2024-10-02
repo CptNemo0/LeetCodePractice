@@ -2,6 +2,13 @@
 
 using namespace std;
 
+int my_max(int a, int b)
+{
+    int difference = a - b;
+    int b_greater = (difference >> 31) & 1;
+    return a - difference * b_greater;
+}
+
 int rob(vector<int>& nums)
 {
     if(!nums.size())
@@ -19,20 +26,15 @@ int rob(vector<int>& nums)
         return max(nums[0], nums[1]);
     }
 
-    if(nums.size() >= 3)
+    int memory_1 = 0;
+    int memory_2 = 0;
+
+    for(int i = 0 ; i < nums.size() ; i++)
     {
-        int memory_1 = 0;
-        int memory_2 = 0;
-
-        for(int i =  nums.size() - 3 ; i > -1; i--)
-        {
-            int current_value = max(nums[i] + memory_1, memory_2);
-            memory_1 = memory_2;
-            memory_2 = current_value;
-        }
+        int current_value = my_max(nums[i] + memory_1, memory_2);
+        memory_1 = memory_2;
+        memory_2 = current_value;
     }
-
-
 
     return memory_2;
 }
