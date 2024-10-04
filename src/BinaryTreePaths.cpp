@@ -35,13 +35,29 @@ vector<string> binaryTreePaths(TreeNode* root)
         auto current_node = nodes.top();
         auto current_string = strings.top();
 
+        nodes.pop();
+        strings.pop();
+
         if(!current_node->left && !current_node->right)
         {
             return_value.push_back(current_string);
-            nodes.pop();
-            strings.pop();
+            continue;
+        }
+
+        if(current_node->right)
+        {
+            nodes.push(current_node->right);
+            strings.push(current_string + "->" + to_string(current_node->right->val));
+        }
+
+        if(current_node->left)
+        {
+            nodes.push(current_node->left);
+            strings.push(current_string + "->" +to_string(current_node->left->val));
         }
     }
+
+    return return_value;
 }
 
 int main()
