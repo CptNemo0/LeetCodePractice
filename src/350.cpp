@@ -21,10 +21,7 @@ vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
     {
         if(nums1[i] == nums2[j])
         {
-            if(return_value.empty() || return_value.back() != nums1[i])
-            {
-                return_value.push_back(nums1[i]);
-            }
+            return_value.push_back(nums1[i]);
             i++;
             j++;
         }
