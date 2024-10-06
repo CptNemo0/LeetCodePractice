@@ -9,12 +9,23 @@ string reverseVowels(string s)
     int left = 0;
     int right = s.length() - 1;
 
-    if(left <= right)
+    while(left < right)
     {
-        if(left == right)
+        if(!vowels.contains(s[left]))
         {
-            break;
+            left++;
+            continue;
         }
+
+        if(!vowels.contains(s[right]))
+        {
+            right--;
+            continue;
+        }
+
+        swap(s[left], s[right]);
+        left++;
+        right--;
     }
 
     return s;
