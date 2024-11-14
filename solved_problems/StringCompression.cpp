@@ -8,87 +8,67 @@ int compress(vector<char>& chars)
 {
     int left = 0;
     int right = 0;
-    int n = chars.size() ;
+    int n = chars.size();
 
     if(n == 1)
     {
         return 1;
     }
 
-    for(int i = 0; i < n; i++)
+    auto lambda = [&chars](int& left, int& right, int difference, int& n)
     {
-        for(auto a : chars)
-        {
-            cout<<a;
-        }
-        cout<<"\n";
+        auto it_hint = chars.erase(chars.begin() + left + 1, chars.begin() + right);
 
-        cout<<"left : "<<left<<endl;
-        cout<<"right: "<<right<<endl;
-        cout<<"i    : "<<i<<endl;
-        cout<<"n    : "<<n<<endl;
-        if(chars[left] == chars[right])
+        string difference_s = std::to_string(difference);
+        int difference_s_len = difference_s.length();
+
+        for(auto& c : difference_s)
         {
+            chars.insert(it_hint, c);
+            it_hint = std::next(it_hint);
+        }
+        n = chars.size() ;
+        left += difference_s_len + 1;
+        right = left;
+    };
+
+    while(left < n && right < n)
+    {
+        if(chars[left] != chars[right])
+        {
+            int difference = right - left;
+
+            if(difference > 1)
+            {
+                lambda(left, right, difference, n);
+                continue;
+            }
+
+            left++;
             right++;
         }
         else
         {
-            int count = right - left;
-            cout<<"\t"<<count<<" "<<chars[left]<<"\n";
-            if(count == 1)
+            right++;
+
+            if(right >= n)
             {
-                cout<<"left++"<<endl;
-                left++;
-                right = left;
-                i = right;
-                n = chars.size();
-                continue;
+                int difference = right - left;
+                if(difference > 1)
+                {
+                    lambda(left, right, difference, n);
+                }
             }
-            chars.erase(chars.begin() + left + 1, chars.begin() + right);
-            string count_str = to_string(count);
-            for(int j = 0 ; j < count_str.length() ; j++)
-            {
-                left++;
-                chars.insert(chars.begin() + left, count_str[j]);
-            }
-            left++;
-            right = left ;
-            i = right;
-            n = chars.size();
         }
     }
-
-    cout<<"\nleft : "<<left<<endl;
-    cout<<"right: "<<right<<endl;
-    cout<<"n    : "<<n<<endl;
-    right++;
-    if(right - left > 1)
-    {
-        if(left == 0)
-        {
-            right--;
-        }
-        chars.erase(chars.begin() + left + 1, chars.begin() + right);
-        int count = right - left;
-        if(count == 1)
-        {
-            return chars.size();
-        }
-        string count_str = to_string(count);
-
-        for(int j = 0 ; j < count_str.length() ; j++)
-        {
-            chars.push_back(count_str[j]);
-        }
-    }
-
+    
     return chars.size();
 }
 
 
 int main()
 {
-    vector<char> v {'a', 'b', 'c'};
+    vector<char> v {'a','b', 'b', 'b', 'b', 'b', 'x','b', 'b', 'b', 'b', 'b', 'b', 'b', 'c', 'c'};
 
     compress(v);
 
