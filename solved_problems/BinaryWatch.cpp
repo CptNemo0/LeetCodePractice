@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 vector<string> readBinaryWatch(int turnedOn) 
 {
     if(turnedOn < 1 || turnedOn > 8)

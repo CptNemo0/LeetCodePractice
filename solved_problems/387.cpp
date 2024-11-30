@@ -6,7 +6,6 @@ using namespace std;
 
 int firstUniqChar(string s) 
 {
-    
     int frequencies[26];
     ZeroMemory(frequencies, 26 * sizeof(int));
 
