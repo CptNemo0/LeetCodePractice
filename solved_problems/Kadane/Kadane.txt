@@ -1,0 +1,19 @@
+Overlaps: with 2 pointers, sliding window, dp, greedy.
+Problem: Given array of numbers return non-empty subarray that has the largest sum possible. Subarray is contiguous.
+Intuition: try to add as little negative numbers as possible
+
+int kadane(vector<int> numbers)
+{
+	if(!numbers.size()) return 0; // handle empty array edge case
+	int max_sum = numbers[0];     // initialize max_sum to the best of your knowledge
+	int current_sum = 0;	      
+	for(const auto& n : numbers)
+	{
+		current_sum = max(current_sum, 0);  // Check if current_sum ie. everything that came before, will 
+						    // have a positive effect. Adding negative number will always 						    // result
+						    // in smaller output, so we must minimize negative numbers added.
+		current_sum += n;		    // Once we assessed that current_sum isn't negative, we can update 						    // current_sum by adding new element.
+		max_sum = max(max_sum, current_sum);// Update max_sum.
+	}
+	return max_sum;
+}
