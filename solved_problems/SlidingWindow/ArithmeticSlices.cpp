@@ -1,6 +1,4 @@
 #include<vector>
-#include<unordered_set>
-#include<unordered_map>
 
 using namespace std;
 
@@ -9,32 +7,24 @@ class Solution
 public:
     int numberOfArithmeticSlices(vector<int>& nums) 
     {
-        vector<int> diffs;
-
-        for(int i = 0; i < nums.size() - 1 ; i++)
+        auto diffs = [&nums](int i)
         {
-            diffs.push_back(nums[i] - nums[i + 1]);
-        }
-
+            return nums[i] - nums[i + 1];
+        };
 
         int left = 0;
-        int right = 0;
+        int right = 1;
         int return_value = 0;
 
-        while(right <= diffs.size())
+        while(right <= nums.size() - 1)
         {
-            if(left == right)
-            {
-                right++;
-                continue;
-            }
-
-            if(diffs[left] != diffs[right] || right == diffs.size())
+            if(right == nums.size() - 1|| diffs(left) != diffs(right))
             {
                 int len = right - left;
                 if(len == 1)
                 {
                     left = right;
+                    right++;
                     continue;
                 }
                 
@@ -42,8 +32,9 @@ public:
                 int subarrays = (n + n * n) / 2;
                 return_value += subarrays;
                 left = right;
+                right++;
             }
-            else if (diffs[left] == diffs[right])
+            else if (diffs(left) == diffs(right))
             {
                 right++;
             }
