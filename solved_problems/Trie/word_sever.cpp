@@ -17,7 +17,6 @@ void print_result(vector<string>& vec)
 
 int main()
 {
-    
 
     Trie trie {};
 
