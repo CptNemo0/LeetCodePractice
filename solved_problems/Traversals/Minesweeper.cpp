@@ -139,7 +139,7 @@ public:
 
 int main()
 {
-    Minesweeper game {10, 10, 15};
+    Minesweeper game {10, 10, 1};
 
     while(true)
     {
