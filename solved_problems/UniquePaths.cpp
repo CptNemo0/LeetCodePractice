@@ -65,5 +65,5 @@ public:
 int main()
 {
     Solution sol {};
-    sol.uniquePaths(3, 7);
+    sol.uniquePathsDP(3, 7);
 }
