@@ -13,26 +13,14 @@ bool hasCycle(ListNode* head)
         return false;
     }
 
-    ListNode* current = head;
+    ListNode* slow = head;
+    ListNode* fast = head->next;
 
-    while (true)
+    while (slow && fast && fast->next)
     {
-        if(current == current->next)
-        {
-            return true;
-        }
-
-        if(current->next)
-        {
-            //because nobody said that the list must remain intact
-            ListNode* next = current->next;
-            current->next = current;
-            current = next;
-        }
-        else
-        {
-            break;
-        }
+        if(fast == slow) return true;
+        slow = slow->next;
+        fast = fast->next->next;
 
     }
     return false;
