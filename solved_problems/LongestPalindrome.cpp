@@ -24,7 +24,7 @@ public:
                 if(value > longest_odd)
                 {
                     cout<<"A\n";
-                    if(value)
+                    if(longest_odd)
                     {
                         sum--;
                     }
