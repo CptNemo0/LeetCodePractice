@@ -54,3 +54,13 @@ inline TreeNode* InitBT()
 
     return root;
 }
+
+void LogList(ListNode* head)
+{
+    ListNode* current = head;
+    while(current)
+    {
+        cout<<" "<<current->val;
+        current = current->next;
+    }
+}
